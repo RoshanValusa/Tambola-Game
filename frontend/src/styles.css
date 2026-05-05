@@ -1,0 +1,54 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: dark;
+}
+
+html, body, #root {
+  height: 100%;
+}
+
+body {
+  font-family: 'Inter', system-ui, sans-serif;
+  background:
+    radial-gradient(1200px 800px at 10% 0%, rgba(167, 139, 250, 0.10), transparent 60%),
+    radial-gradient(1000px 600px at 90% 10%, rgba(34, 211, 238, 0.08), transparent 60%),
+    radial-gradient(800px 600px at 50% 100%, rgba(244, 114, 182, 0.07), transparent 60%),
+    #07070d;
+}
+
+@layer components {
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-lg px-4 py-2 font-medium transition-all duration-150 active:scale-95 disabled:opacity-40 disabled:cursor-not-allowed;
+  }
+  .btn-primary {
+    @apply btn bg-gradient-to-br from-neon-cyan to-neon-violet text-bg-900 shadow-glow hover:shadow-glow-violet;
+  }
+  .btn-secondary {
+    @apply btn bg-bg-700 border border-bg-600 text-white hover:bg-bg-600;
+  }
+  .btn-danger {
+    @apply btn bg-rose-600/90 text-white hover:bg-rose-500;
+  }
+  .card {
+    @apply rounded-2xl bg-bg-800/70 border border-bg-700 backdrop-blur p-5;
+  }
+  .input {
+    @apply bg-bg-700 border border-bg-600 rounded-lg px-3 py-2 outline-none focus:border-neon-cyan focus:ring-2 focus:ring-neon-cyan/30;
+  }
+  .pill {
+    @apply inline-flex items-center gap-1 rounded-full px-3 py-1 text-xs font-medium bg-bg-700 border border-bg-600;
+  }
+  .neon-text {
+    @apply font-display tracking-wider;
+    text-shadow: 0 0 12px rgba(34, 211, 238, 0.55), 0 0 24px rgba(167, 139, 250, 0.35);
+  }
+}
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 8px; height: 8px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: rgba(167, 139, 250, 0.35); border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: rgba(167, 139, 250, 0.6); }

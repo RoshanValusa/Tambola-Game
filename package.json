@@ -1,0 +1,21 @@
+{
+  "name": "tambola",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Real-time multiplayer Tambola (Housie) web app",
+  "workspaces": [
+    "packages/*",
+    "backend",
+    "frontend"
+  ],
+  "scripts": {
+    "build": "npm run build --workspace packages/shared && npm run build --workspace backend && npm run build --workspace frontend",
+    "dev:backend": "npm run dev --workspace backend",
+    "dev:frontend": "npm run dev --workspace frontend",
+    "test": "npm run test --workspace backend",
+    "lint": "npm run lint --workspaces --if-present"
+  },
+  "engines": {
+    "node": ">=20.0.0"
+  }
+}
