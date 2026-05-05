@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { SocketEvents } from '@tambola/shared';
@@ -12,6 +12,7 @@ export default function Lobby() {
   const nav = useNavigate();
   const me = useSessionStore((s) => s.user);
   const { players, hostId, ticket, config, state } = useRoomStore();
+  const [intervalDraft, setIntervalDraft] = useState<number | null>(null);
 
   useEffect(() => {
     if (!code || !me) {
@@ -32,7 +33,7 @@ export default function Lobby() {
   }, [state, code, nav]);
 
   const isHost = me?.userId === hostId;
-  const canStart = isHost && players.length >= 2;
+  const canStart = isHost && players.length >= 1;
 
   async function start() {
     try {
@@ -125,15 +126,30 @@ export default function Lobby() {
           {isHost && config && (
             <div className="mt-4 space-y-2">
               <label className="text-xs text-white/60">
-                Number-call interval: {(config.callIntervalMs / 1000).toFixed(1)}s
+                Number-call interval: {((intervalDraft ?? config.callIntervalMs) / 1000).toFixed(1)}s
               </label>
               <input
                 type="range"
                 min={2000}
                 max={15000}
                 step={500}
-                value={config.callIntervalMs}
-                onChange={(e) => configure(Number(e.target.value))}
+                value={intervalDraft ?? config.callIntervalMs}
+                onChange={(e) => setIntervalDraft(Number(e.target.value))}
+                onMouseUp={(e) => {
+                  const v = Number((e.target as HTMLInputElement).value);
+                  setIntervalDraft(null);
+                  if (v !== config.callIntervalMs) configure(v);
+                }}
+                onTouchEnd={(e) => {
+                  const v = Number((e.target as HTMLInputElement).value);
+                  setIntervalDraft(null);
+                  if (v !== config.callIntervalMs) configure(v);
+                }}
+                onKeyUp={(e) => {
+                  const v = Number((e.target as HTMLInputElement).value);
+                  setIntervalDraft(null);
+                  if (v !== config.callIntervalMs) configure(v);
+                }}
                 className="w-full"
               />
             </div>
