@@ -4,17 +4,14 @@
     "module": "node16",
     "moduleResolution": "node16",
     "outDir": "./dist",
+    "rootDir": "./src",
     "strict": true,
     "esModuleInterop": true,
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
     "resolveJsonModule": true,
     "declaration": false,
-    "sourceMap": true,
-    "baseUrl": "./",
-    "paths": {
-      "@tambola/shared": ["../packages/shared/dist/index.d.ts"]
-    }
+    "sourceMap": true
   },
   "include": ["src/**/*"],
   "exclude": ["node_modules", "dist", "**/*.test.ts"]
